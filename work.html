@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunrise Solar - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans Arabic', sans-serif;
+            font-family: 'Inter', 'Noto Sans', 'Noto Sans Arabic', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 40px 20px;
@@ -102,6 +102,27 @@
             height: 250px;
             object-fit: cover;
             display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-image[alt] {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        img.project-image {
+            display: block;
+        }
+
+        img.project-image:broken {
+            display: flex;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .project-details {
@@ -365,9 +386,33 @@
     </div>
 
     <script>
+        // Handle broken images
+        function handleImageError(img) {
+            img.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            img.style.display = 'flex';
+            img.style.alignItems = 'center';
+            img.style.justifyContent = 'center';
+            img.style.color = 'white';
+            img.style.fontSize = '48px';
+            img.innerHTML = '📷';
+        }
+
+        // Set up image error handlers on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img.project-image');
+            images.forEach(img => {
+                img.onerror = function() { handleImageError(this); };
+                // Trigger error handler immediately if image is broken
+                if (!img.complete || img.naturalHeight === 0) {
+                    handleImageError(img);
+                }
+            });
+        });
+
         function setLanguage(lang) {
             document.documentElement.lang = lang;
-            if (lang === 'ar' || lang === 'ku') {
+            // Arabic is RTL, Kurdish and English are LTR
+            if (lang === 'ar') {
                 document.documentElement.dir = 'rtl';
             } else {
                 document.documentElement.dir = 'ltr';
