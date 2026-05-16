@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunrise Solar - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans:wght@300;400;600;700&family=Noto+Serif+Sorani+Abjad:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+            font-family: 'Inter', 'Noto Sans', 'Noto Serif Sorani Abjad', 'Noto Sans Arabic', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 40px 20px;
@@ -104,25 +104,38 @@
             display: block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            position: relative;
             font-size: 48px;
+        }
+
+        .project-image.placeholder {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .project-image[alt] {
+        .project-image.placeholder:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.02);
+        }
+
+        .media-placeholder-text {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        video.project-image {
             display: block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: black;
         }
 
         img.project-image {
             display: block;
-        }
-
-        img.project-image:broken {
-            display: flex;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .project-details {
@@ -386,36 +399,78 @@
     </div>
 
     <script>
-        // Handle broken images
-        function handleImageError(img) {
-            img.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            img.style.display = 'flex';
-            img.style.alignItems = 'center';
-            img.style.justifyContent = 'center';
-            img.style.color = 'white';
-            img.style.fontSize = '48px';
-            img.innerHTML = '📷';
+        // Handle broken images and videos
+        function createMediaPlaceholder(container, type) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'project-image placeholder';
+            
+            if (type === 'video') {
+                placeholder.innerHTML = `
+                    <div style="font-size: 48px;">🎬</div>
+                    <div class="media-placeholder-text">Video not available</div>
+                `;
+            } else {
+                placeholder.innerHTML = `
+                    <div style="font-size: 48px;">📷</div>
+                    <div class="media-placeholder-text">Image not available</div>
+                `;
+            }
+            
+            return placeholder;
         }
 
         // Set up image error handlers on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle images
             const images = document.querySelectorAll('img.project-image');
             images.forEach(img => {
-                img.onerror = function() { handleImageError(this); };
-                // Trigger error handler immediately if image is broken
+                const handleImageError = function() {
+                    const placeholder = createMediaPlaceholder(img.parentElement, 'image');
+                    img.replaceWith(placeholder);
+                };
+                
+                img.onerror = handleImageError;
+                
+                // Check if image is already broken
                 if (!img.complete || img.naturalHeight === 0) {
-                    handleImageError(img);
+                    handleImageError();
                 }
+            });
+
+            // Handle videos
+            const videos = document.querySelectorAll('video.project-image');
+            videos.forEach(video => {
+                video.addEventListener('error', function() {
+                    const placeholder = createMediaPlaceholder(video.parentElement, 'video');
+                    video.replaceWith(placeholder);
+                });
+
+                // Check if video can't load
+                const checkVideo = setTimeout(function() {
+                    if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+                        const placeholder = createMediaPlaceholder(video.parentElement, 'video');
+                        video.replaceWith(placeholder);
+                    }
+                }, 1000);
             });
         });
 
         function setLanguage(lang) {
             document.documentElement.lang = lang;
-            // Arabic is RTL, Kurdish and English are LTR
+            // Arabic is RTL, Kurdish (Sorani) and English are LTR
             if (lang === 'ar') {
                 document.documentElement.dir = 'rtl';
             } else {
                 document.documentElement.dir = 'ltr';
+            }
+
+            // Update font for Kurdish Sorani
+            if (lang === 'ku') {
+                document.body.style.fontFamily = "'Noto Serif Sorani Abjad', 'Noto Sans', 'Inter', sans-serif";
+            } else if (lang === 'ar') {
+                document.body.style.fontFamily = "'Noto Sans Arabic', 'Noto Sans', 'Inter', sans-serif";
+            } else {
+                document.body.style.fontFamily = "'Inter', 'Noto Sans', sans-serif";
             }
 
             // Update all text elements
