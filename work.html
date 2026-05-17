@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Solar - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans:wght@300;400;600;700&family=Noto+Serif+Sorani+Abjad:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html[dir="rtl"] {
+            direction: rtl;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans', 'Noto Serif Sorani Abjad', 'Noto Sans Arabic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            font-size: 48px;
+        }
+
+        .project-image.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-image.placeholder:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.02);
+        }
+
+        .media-placeholder-text {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        video.project-image {
+            display: block;
+            background: black;
+        }
+
+        img.project-image {
+            display: block;
+        }
+
+        .project-details {
+            padding: 24px;
+        }
+
+        .project-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .project-location {
+            display: flex;
+            align-items: center;
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .project-location i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .project-specs {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        .project-year {
+            color: #999;
+            font-size: 13px;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+        <button class="lang-btn" onclick="setLanguage('ku')">KU</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 data-en="Sunrise Solar Portfolio" data-ar="محفظة شروق الشمس الشمسية" data-ku="Pileya Sunrise Solar">Sunrise Solar Portfolio</h1>
+            <p data-en="Professional Solar Installation Projects" data-ar="مشاريع تركيب الألواح الشمسية الاحترافية" data-ku="Projeyên Sazkirina Panelên Solaryê yên Profesyonel">Professional Solar Installation Projects</p>
+        </header>
+
+        <div class="portfolio-grid">
+            <!-- Card 1 -->
+            <div class="project-card">
+                <img src="WhatsApp Image 2026-05-15 at 4.24.33 PM.jpeg" alt="Battery Installation" class="project-image">
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Battery Installation" data-ar="تركيب البطارية" data-ku="Sazkirina Batariyê">Battery Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 16 kW Single Hybrid | 4 Batteries (15 kW)" data-ar="السعة: 16 كيلو وات هجين مفرد | 4 بطاريات (15 كيلو وات)" data-ku="Sifir: 16 kW Hybrid | 4 Batariye (15 kW)">Capacity: 16 kW Single Hybrid | 4 Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Professional battery installation with 4 batteries (15 kW) and 16 kW single hybrid system for residential backup power." data-ar="تركيب احترافي للبطارية مع 4 بطاريات (15 كيلو وات) و 16 كيلو وات نظام هجين مفرد لطاقة احتياطية سكنية." data-ku="Sazkirina profesyonel a batariyê bi 4 batariye (15 kW) û pergala hybrid a 16 kW a yekane ji bo hêza hilberandinê ya malî.">Professional battery installation with 4 batteries (15 kW) and 16 kW single hybrid system for residential backup power.</p>
+                    <p class="project-year" data-en="Completed: 2024" data-ar="اكتمل: 2024" data-ku="Qediya: 2024">Completed: 2024</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="WhatsApp Video 2026-05-15 at 4.24.33 PM.mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)" data-ar="السعة: 15 كيلو وات Deye | 60 لوح شمسي، 4 بطاريات (15 كيلو وات)" data-ku="Sifir: 15 kW Deye | 60 Panelên Solaryê, 4 Batariye (15 kW)">Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Complete residential solar system with 60 high-capacity panels and battery backup." data-ar="نظام شمسي سكني كامل مع 60 لوح ذي سعة عالية ونسخة احتياطية بطارية." data-ku="Pergala solaryê ya malî ya bêkêşandinî 60 panelên xwedan sîfira bilind û paşgiroka batariyê.">Complete residential solar system with 60 high-capacity panels and battery backup.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="WhatsApp Video 2026-05-15 at 4.24.33 PM (1).mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)" data-ar="السعة: 15 كيلو وات Deye | 60 لوح شمسي، 4 بطاريات (15 كيلو وات)" data-ku="Sifir: 15 kW Deye | 60 Panelên Solaryê, 4 Batariye (15 kW)">Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Residential solar installation with comprehensive battery storage system." data-ar="تركيب شمسي سكني مع نظام تخزين بطارية شامل." data-ku="Sazkirina solaryê ya malî bi pergala hilberandina batariyê ya berfireh.">Residential solar installation with comprehensive battery storage system.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="WhatsApp Video 2026-05-15 at 4.24.33 PM (2).mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)" data-ar="السعة: 15 كيلو وات Deye | 60 لوح شمسي، 4 بطاريات (15 كيلو وات)" data-ku="Sifir: 15 kW Deye | 60 Panelên Solaryê, 4 Batariye (15 kW)">Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Premium home solar solution with advanced inverter technology." data-ar="حل شمسي منزلي متقدم مع تكنولوجيا محول متقدمة." data-ku="Çareseriya solaryê ya premyum ya malî bi teknolojiya inverterê ya pêşkeftî.">Premium home solar solution with advanced inverter technology.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="WhatsApp Video 2026-05-15 at 4.46.14 PM.mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)" data-ar="السعة: 15 كيلو وات Deye | 60 لوح شمسي، 4 بطاريات (15 كيلو وات)" data-ku="Sifir: 15 kW Deye | 60 Panelên Solaryê, 4 Batariye (15 kW)">Capacity: 15 kW Deye | 60 Solar Panels, 4 Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Reliable residential solar system for continuous power supply." data-ar="نظام شمسي سكني موثوق لتوفير الطاقة المستمر." data-ku="Pergala solaryê ya malî ya dilserî ji bo vehênandinê hêza domdar.">Reliable residential solar system for continuous power supply.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="WhatsApp Video 2026-05-15 at 4.46.14 PM (1).mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation - 27 Longi Panels" data-ar="تركيب منزلي - 27 لوح Longi" data-ku="Sazkirina Malî - 27 Panelên Longi">Home Installation - 27 Longi Panels</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 18 kW Hybrid | 27 Longi Panels, Deye 18kW, 3 Batteries (16 kWh)" data-ar="السعة: 18 كيلو وات هجين | 27 لوح Longi، Deye 18kW، 3 بطاريات (16 كيلو وات ساعة)" data-ku="Sifir: 18 kW Hybrid | 27 Panelên Longi, Deye 18kW, 3 Batariye (16 kWh)">Capacity: 18 kW Hybrid | 27 Longi Panels, Deye 18kW, 3 Batteries (16 kWh)</div>
+                    <p class="project-description" data-en="Advanced 18 kW hybrid system with 27 premium Longi solar panels and triple battery storage at 32 Park location." data-ar="نظام هجين متقدم 18 كيلو وات مع 27 لوح Longi شمسي متقدم وتخزين بطارية ثلاثية في موقع 32 Park." data-ku="Pergala hybrid ya pêşkeftî 18 kW bi 27 panelên Longi yên solaryê yên kêmkirî û depokirina batariyê ya sêyem li ciyê 32 Park.">Advanced 18 kW hybrid system with 27 premium Longi solar panels and triple battery storage at 32 Park location.</p>
+                    <p class="project-year" data-en="Completed: 2026" data-ar="اكتمل: 2026" data-ku="Qediya: 2026">Completed: 2026</p>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="IMG_1994.MOV" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 20 kW Deye | 20 Panels (615W), 1 Lithium Battery (5 kW)" data-ar="السعة: 20 كيلو وات Deye | 20 لوح (615 وات)، 1 بطارية ليثيوم (5 كيلو وات)" data-ku="Sifir: 20 kW Deye | 20 Panelê (615W), 1 Batariyê Lithium (5 kW)">Capacity: 20 kW Deye | 20 Panels (615W), 1 Lithium Battery (5 kW)</div>
+                    <p class="project-description" data-en="Professional 20 kW installation featuring high-efficiency panels and lithium battery storage." data-ar="تركيب احترافي 20 كيلو وات مع ألواح عالية الكفاءة وتخزين بطارية ليثيوم." data-ku="Sazkirina profesyonel 20 kW bi panelên karbidestiya bilind û depokirina batariyê Lithium.">Professional 20 kW installation featuring high-efficiency panels and lithium battery storage.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="9.mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 6 kW Viva | 14 Longi Panels (615W), 2 Viva Inverters" data-ar="السعة: 6 كيلو وات Viva | 14 لوح Longi (615 وات)، 2 مقلب Viva" data-ku="Sifir: 6 kW Viva | 14 Panelên Longi (615W), 2 Inverterên Viva">Capacity: 6 kW Viva | 14 Longi Panels (615W), 2 Viva Inverters</div>
+                    <p class="project-description" data-en="Grid-connected 6 kW system with dual Viva inverters for on-grid solar power." data-ar="نظام 6 كيلو وات متصل بالشبكة مع مقلبات Viva مزدوجة لطاقة شمسية مرتبطة بالشبكة." data-ku="Pergala 6 kW ya girêdayî torê bi inverterên Viva yên dualî ji bo hêza solaryê ya girêdayî torê.">Grid-connected 6 kW system with dual Viva inverters for on-grid solar power.</p>
+                    <p class="project-year" data-en="Completed: 2024" data-ar="اكتمل: 2024" data-ku="Qediya: 2024">Completed: 2024</p>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="Video Project.mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 6 kW Viva | 14 Longi Panels (615W), 2 Viva Inverters" data-ar="السعة: 6 كيلو وات Viva | 14 لوح Longi (615 وات)، 2 مقلب Viva" data-ku="Sifir: 6 kW Viva | 14 Panelên Longi (615W), 2 Inverterên Viva">Capacity: 6 kW Viva | 14 Longi Panels (615W), 2 Viva Inverters</div>
+                    <p class="project-description" data-en="Parallel-configured grid-tied solar system with maximum efficiency output." data-ar="نظام شمسي مرتبط بالشبكة معروض بالتوازي مع أقصى كفاءة إنتاجية." data-ku="Pergala solaryê ya girêdayî torê ya çêkirî bi paralel bi veberhêna herî zaf.">Parallel-configured grid-tied solar system with maximum efficiency output.</p>
+                    <p class="project-year" data-en="Completed: 2024" data-ar="اكتمل: 2024" data-ku="Qediya: 2024">Completed: 2024</p>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="IMG_0112 (1).MOV" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Home Installation" data-ar="تركيب منزلي" data-ku="Sazkirina Malî">Home Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 11 kW Sorotec | 20 Longi Panels (620W), 2 Felicity Batteries (15 kW)" data-ar="السعة: 11 كيلو وات Sorotec | 20 لوح Longi (620 وات)، 2 بطارية Felicity (15 كيلو وات)" data-ku="Sifir: 11 kW Sorotec | 20 Panelên Longi (620W), 2 Batariyên Felicity (15 kW)">Capacity: 11 kW Sorotec | 20 Longi Panels (620W), 2 Felicity Batteries (15 kW)</div>
+                    <p class="project-description" data-en="Legacy 11 kW system with Sorotec inverter and dual Felicity battery storage for reliable backup power." data-ar="نظام 11 كيلو وات قديم مع مقلب Sorotec وتخزين بطارية Felicity مزدوج لطاقة احتياطية موثوقة." data-ku="Pergala 11 kW ya mîrî bi inverterê Sorotec û depokirina batariyê Felicity ya dualî ji bo hêza paşgiroka dilserî.">Legacy 11 kW system with Sorotec inverter and dual Felicity battery storage for reliable backup power.</p>
+                    <p class="project-year" data-en="Completed: 2022" data-ar="اكتمل: 2022" data-ku="Qediya: 2022">Completed: 2022</p>
+                </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="project-card">
+                <video class="project-image" controls><source src="10.mp4" type="video/mp4"></video>
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Apartment Installation" data-ar="تركيب سكني" data-ku="Sazkirina Apartman">Apartment Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 20 kW Deye 3P | 6x Deye 20kW Inverters, 8 Genix Batteries (16 kW)" data-ar="السعة: 20 كيلو وات Deye 3P | 6 مقلبات Deye 20kW، 8 بطاريات Genix (16 كيلو وات)" data-ku="Sifir: 20 kW Deye 3P | 6 Inverterên Deye 20kW, 8 Batariyên Genix (16 kW)">Capacity: 20 kW Deye 3P | 6x Deye 20kW Inverters, 8 Genix Batteries (16 kW)</div>
+                    <p class="project-description" data-en="Commercial-grade 20 kW 3-phase system with 6 parallel Deye inverters and 8 Genix batteries for complete monitoring via green board AC/DC PV." data-ar="نظام 3 مراحل من الدرجة التجارية 20 كيلو وات مع 6 مقلبات Deye متوازية و 8 بطاريات Genix للمراقبة الكاملة عبر لوحة AC/DC PV الخضراء." data-ku="Pergala 3-fazê ya dereceya tîjê 20 kW bi 6 inverterên Deye ya paralel û 8 batariyên Genix ji bo nîgarkirina bêkêşandinî ya pir taybetî AC/DC PV.">Commercial-grade 20 kW 3-phase system with 6 parallel Deye inverters and 8 Genix batteries for complete monitoring via green board AC/DC PV.</p>
+                    <p class="project-year" data-en="Completed: 2025" data-ar="اكتمل: 2025" data-ku="Qediya: 2025">Completed: 2025</p>
+                </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="project-card">
+                <img src="59321538-6734-4820-9008-56a307a24ced.jpg" alt="Apartment Installation" class="project-image">
+                <div class="project-details">
+                    <h3 class="project-title" data-en="Apartment Installation" data-ar="تركيب سكني" data-ku="Sazkirina Apartman">Apartment Installation</h3>
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Erbil" data-ar="أربيل" data-ku="Hewlêr">Erbil</span>
+                    </div>
+                    <div class="project-specs" data-en="Capacity: 16 kW Deye | 4x Deye 16kW Inverters, 4 Genix Batteries (16 kW)" data-ar="السعة: 16 كيلو وات Deye | 4 مقلبات Deye 16kW، 4 بطاريات Genix (16 كيلو وات)" data-ku="Sifir: 16 kW Deye | 4 Inverterên Deye 16kW, 4 Batariyên Genix (16 kW)">Capacity: 16 kW Deye | 4x Deye 16kW Inverters, 4 Genix Batteries (16 kW)</div>
+                    <p class="project-description" data-en="Scalable 16 kW apartment system featuring 4 Deye inverters and 4 Genix batteries with smart AC/DC PV monitoring board." data-ar="نظام سكني قابل للتوسع 16 كيلو وات مع 4 مقلبات Deye و 4 بطاريات Genix مع لوحة مراقبة AC/DC PV ذكية." data-ku="Pergala apartman ya scala 16 kW bi 4 inverterên Deye û 4 batariyên Genix bi pankaya nîgarkirina AC/DC PV a smart.">Scalable 16 kW apartment system featuring 4 Deye inverters and 4 Genix batteries with smart AC/DC PV monitoring board.</p>
+                    <p class="project-year" data-en="Completed: 2026" data-ar="اكتمل: 2026" data-ku="Qediya: 2026">Completed: 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle broken images and videos
+        function createMediaPlaceholder(container, type) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'project-image placeholder';
+            
+            if (type === 'video') {
+                placeholder.innerHTML = `
+                    <div style="font-size: 48px;">🎬</div>
+                    <div class="media-placeholder-text">Video not available</div>
+                `;
+            } else {
+                placeholder.innerHTML = `
+                    <div style="font-size: 48px;">📷</div>
+                    <div class="media-placeholder-text">Image not available</div>
+                `;
+            }
+            
+            return placeholder;
+        }
+
+        // Set up image error handlers on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle images
+            const images = document.querySelectorAll('img.project-image');
+            images.forEach(img => {
+                const handleImageError = function() {
+                    const placeholder = createMediaPlaceholder(img.parentElement, 'image');
+                    img.replaceWith(placeholder);
+                };
+                
+                img.onerror = handleImageError;
+                
+                // Check if image is already broken
+                if (!img.complete || img.naturalHeight === 0) {
+                    handleImageError();
+                }
+            });
+
+            // Handle videos
+            const videos = document.querySelectorAll('video.project-image');
+            videos.forEach(video => {
+                video.addEventListener('error', function() {
+                    const placeholder = createMediaPlaceholder(video.parentElement, 'video');
+                    video.replaceWith(placeholder);
+                });
+
+                // Check if video can't load
+                const checkVideo = setTimeout(function() {
+                    if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+                        const placeholder = createMediaPlaceholder(video.parentElement, 'video');
+                        video.replaceWith(placeholder);
+                    }
+                }, 1000);
+            });
+        });
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            // Arabic is RTL, Kurdish (Sorani) and English are LTR
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+
+            // Update font for Kurdish Sorani
+            if (lang === 'ku') {
+                document.body.style.fontFamily = "'Noto Serif Sorani Abjad', 'Noto Sans', 'Inter', sans-serif";
+            } else if (lang === 'ar') {
+                document.body.style.fontFamily = "'Noto Sans Arabic', 'Noto Sans', 'Inter', sans-serif";
+            } else {
+                document.body.style.fontFamily = "'Inter', 'Noto Sans', sans-serif";
+            }
+
+            // Update all text elements
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                const attr = `data-${lang}`;
+                if (el.hasAttribute(attr)) {
+                    if (el.tagName === 'IMG' || el.tagName === 'VIDEO') {
+                        el.alt = el.getAttribute(attr);
+                    } else {
+                        el.textContent = el.getAttribute(attr);
+                    }
+                }
+            });
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
