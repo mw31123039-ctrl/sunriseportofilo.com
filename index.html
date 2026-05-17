@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise Solar | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17211f;
+      --muted: #586b66;
+      --paper: #fffaf0;
+      --surface: #ffffff;
+      --line: #e9ddc9;
+      --sun: #f7a51d;
+      --sun-dark: #c86816;
+      --green: #1f6f5b;
+      --blue: #24566f;
+      --shadow: 0 18px 45px rgba(23, 33, 31, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", "Noto Sans Arabic", sans-serif;
+      line-height: 1.55;
+    }
+
+    body.rtl {
+      font-family: "Noto Sans Arabic", "Inter", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 250, 240, 0.9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: conic-gradient(from 20deg, var(--sun), #ffd36c, var(--green), var(--sun));
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(247, 165, 29, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .lang-btn {
+      min-width: 58px;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .lang-btn.active {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 54px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid #f5c46e;
+      background: #fff6df;
+      border-radius: 8px;
+      color: #95520d;
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--sun);
+      box-shadow: 0 0 0 5px rgba(247, 165, 29, 0.18);
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 6vw, 5.9rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .lead {
+      max-width: 610px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin-bottom: 30px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 34px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 8px;
+      padding: 0 18px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--sun);
+      color: #1f1709;
+      box-shadow: 0 12px 28px rgba(247, 165, 29, 0.28);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 610px;
+    }
+
+    .stat {
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 570px;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: #243b35;
+    }
+
+    .hero-media video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 18, 15, 0.05), rgba(10, 18, 15, 0.62));
+    }
+
+    .media-label {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      color: #fff;
+    }
+
+    body.rtl .media-label {
+      direction: rtl;
+    }
+
+    .media-label strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.1;
+    }
+
+    .media-label span {
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .pill {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      font-weight: 800;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.55fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    .kicker {
+      color: var(--sun-dark);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    body.rtl .kicker {
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .service-grid,
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(23, 33, 31, 0.05);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #fff1cf;
+      color: var(--sun-dark);
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .work-band {
+      background: #17211f;
+      color: #fff;
+    }
+
+    .work-band .section-copy,
+    .work-band .card p,
+    .work-band .video-meta {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .work-band .kicker {
+      color: #ffd36c;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .video-card {
+      background: #21302d;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-card video {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: block;
+      object-fit: cover;
+      background: #0e1513;
+    }
+
+    .video-body {
+      padding: 18px;
+    }
+
+    .video-body h3 {
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .step {
+      background: #fff;
+      padding: 24px;
+      min-height: 190px;
+    }
+
+    .step span {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .proof-grid .card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .proof-grid strong {
+      display: block;
+      font-size: 1.15rem;
+      line-height: 1.15;
+    }
+
+    .quote {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.55fr);
+      gap: 28px;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 10px 12px;
+      background: #f7f1e5;
+      border-radius: 8px;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    [data-i18n] {
+      transition: opacity 120ms ease;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .section-head,
+      .quote {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        min-height: 440px;
+      }
+
+      .service-grid,
+      .video-grid,
+      .proof-grid,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .brand {
+        font-size: 1rem;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .nav {
+        gap: 12px;
+      }
+
+      .lang-btn {
+        min-width: 46px;
+        padding: 0 8px;
+      }
+
+      .hero {
+        min-height: 0;
+        padding: 42px 0 54px;
+      }
+
+      .stats,
+      .service-grid,
+      .video-grid,
+      .proof-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        min-height: 360px;
+      }
+
+      .media-label {
+        display: block;
+      }
+
+      .pill {
+        display: inline-block;
+        margin-top: 12px;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .quote {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Sunrise Solar home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="25" height="25" viewBox="0 0 24 24" fill="none">
+            <path d="M12 4V2M12 22v-2M4 12H2m20 0h-2M5.64 5.64 4.22 4.22m15.56 15.56-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span data-i18n="brand">Sunrise Solar</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#work" data-i18n="navWork">Our Work</a>
+        <a href="#process" data-i18n="navProcess">Process</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language switcher">
+        <button class="lang-btn active" type="button" data-lang="en">EN</button>
+        <button class="lang-btn" type="button" data-lang="ku">KU</button>
+        <button class="lang-btn" type="button" data-lang="ar">AR</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <div class="container hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow" data-i18n="heroBadge">Clean energy for homes and businesses</div>
+          <h1 data-i18n="heroTitle">Power your life with Sunrise Solar.</h1>
+          <p class="lead" data-i18n="heroText">A solar portfolio for installing complete systems, supplying panels, inverters and batteries, and maintaining reliable clean energy across Kurdistan.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact" data-i18n="heroCta">Get a free quote</a>
+            <a class="btn btn-secondary" href="#work" data-i18n="heroWork">View our work</a>
+          </div>
+          <div class="stats" aria-label="Company highlights">
+            <div class="stat">
+              <strong>10+</strong>
+              <span data-i18n="statWarranty">Years warranty</span>
+            </div>
+            <div class="stat">
+              <strong>70%</strong>
+              <span data-i18n="statSave">Possible bill savings</span>
+            </div>
+            <div class="stat">
+              <strong>24/7</strong>
+              <span data-i18n="statSupport">Monitoring support</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-label="Sunrise Solar installation video">
+          <video autoplay muted loop playsinline poster="" preload="metadata">
+            <source src="assets/videos/video-project.mp4" type="video/mp4">
+          </video>
+          <div class="media-label">
+            <div>
+              <strong data-i18n="mediaTitle">Real solar work, ready to show.</strong>
+              <span data-i18n="mediaText">Installation footage from the Sunrise portfolio.</span>
+            </div>
+            <div class="pill" data-i18n="mediaPill">Featured Project</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="servicesKicker">Services</div>
+            <h2 data-i18n="servicesTitle">Everything needed to move from sunlight to power.</h2>
+          </div>
+          <p class="section-copy" data-i18n="servicesCopy">Sunrise handles planning, equipment, installation, testing, and long-term care for residential and commercial solar systems.</p>
+        </div>
+        <div class="service-grid">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18v3h3l6.7-6.7a4 4 0 0 0 5-5l-2.8 2.8-3-3 2.8-2.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="serviceOneTitle">Installation</h3>
+            <p data-i18n="serviceOneText">Professional rooftop and ground solar installation with smart inverters, clean wiring, testing, and handover support.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1 14H5L4 7ZM8 7a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 data-i18n="serviceTwoTitle">Solar equipment</h3>
+            <p data-i18n="serviceTwoText">High-quality panels, batteries, inverters, protection units, and complete kits selected for each customer's energy needs.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3 data-i18n="serviceThreeTitle">Maintenance</h3>
+            <p data-i18n="serviceThreeText">Cleaning, troubleshooting, repairs, battery checks, and performance optimization to keep systems efficient for years.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-band" id="work">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="workKicker">Portfolio videos</div>
+            <h2 data-i18n="workTitle">Show customers the work before they call.</h2>
+          </div>
+          <p class="section-copy" data-i18n="workCopy">These local project videos are embedded directly into the portfolio, so visitors can watch installations, equipment, and finished solar systems.</p>
+        </div>
+        <div class="video-grid">
+          <article class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="assets/videos/9.mp4" type="video/mp4">
+            </video>
+            <div class="video-body">
+              <h3 data-i18n="videoOneTitle">Rooftop installation</h3>
+              <p class="video-meta" data-i18n="videoOneText">A practical look at panel placement and site work.</p>
+            </div>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="assets/videos/10.mp4" type="video/mp4">
+            </video>
+            <div class="video-body">
+              <h3 data-i18n="videoTwoTitle">System setup</h3>
+              <p class="video-meta" data-i18n="videoTwoText">Equipment, wiring, and installation details for customers.</p>
+            </div>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="assets/videos/video-project.mp4" type="video/mp4">
+            </video>
+            <div class="video-body">
+              <h3 data-i18n="videoThreeTitle">Project highlight</h3>
+              <p class="video-meta" data-i18n="videoThreeText">A featured Sunrise project for the main portfolio reel.</p>
+            </div>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="assets/videos/whatsapp-project-2026-05-15.mp4" type="video/mp4">
+            </video>
+            <div class="video-body">
+              <h3 data-i18n="videoFourTitle">On-site progress</h3>
+              <p class="video-meta" data-i18n="videoFourText">A quick field clip showing real installation progress.</p>
+            </div>
+          </article>
+          <article class="video-card">
+            <video controls preload="metadata" playsinline>
+              <source src="assets/videos/img-1995.mp4" type="video/mp4">
+            </video>
+            <div class="video-body">
+              <h3 data-i18n="videoFiveTitle">Finished solar work</h3>
+              <p class="video-meta" data-i18n="videoFiveText">Additional project footage for customers reviewing Sunrise work.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="processKicker">How we work</div>
+            <h2 data-i18n="processTitle">Clear steps from inspection to switch-on.</h2>
+          </div>
+          <p class="section-copy" data-i18n="processCopy">The portfolio explains the service path in a simple way, making it easier for new customers to trust the process.</p>
+        </div>
+        <div class="process">
+          <article class="step">
+            <span>1</span>
+            <h3 data-i18n="stepOneTitle">Site check</h3>
+            <p data-i18n="stepOneText">Measure roof space, shade, current load, and customer goals.</p>
+          </article>
+          <article class="step">
+            <span>2</span>
+            <h3 data-i18n="stepTwoTitle">System design</h3>
+            <p data-i18n="stepTwoText">Choose panels, inverter, battery capacity, and protection equipment.</p>
+          </article>
+          <article class="step">
+            <span>3</span>
+            <h3 data-i18n="stepThreeTitle">Install</h3>
+            <p data-i18n="stepThreeText">Mount, wire, test, and document the system professionally.</p>
+          </article>
+          <article class="step">
+            <span>4</span>
+            <h3 data-i18n="stepFourTitle">Support</h3>
+            <p data-i18n="stepFourText">Monitor performance, maintain equipment, and help when needed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker" data-i18n="proofKicker">Why Sunrise</div>
+            <h2 data-i18n="proofTitle">Built for confidence, not confusion.</h2>
+          </div>
+          <p class="section-copy" data-i18n="proofCopy">Customers can quickly see why Sunrise is a strong choice for solar buying, installation, and care.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="card">
+            <div class="icon" aria-hidden="true">70%</div>
+            <div>
+              <strong data-i18n="proofOneTitle">Lower electricity bills</strong>
+              <p data-i18n="proofOneText">Designed to reduce grid dependence.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">10</div>
+            <div>
+              <strong data-i18n="proofTwoTitle">Warranty options</strong>
+              <p data-i18n="proofTwoText">Long-term confidence for every system.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">24</div>
+            <div>
+              <strong data-i18n="proofThreeTitle">Support and monitoring</strong>
+              <p data-i18n="proofThreeText">Help for cleaning, repairs, and performance.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="quote">
+          <div>
+            <div class="kicker" data-i18n="contactKicker">Get started</div>
+            <h2 data-i18n="contactTitle">Ready to go solar?</h2>
+            <p class="section-copy" data-i18n="contactCopy">Contact Sunrise Solar for a custom quote, free consultation, or equipment recommendation for your home or business.</p>
+          </div>
+          <div class="contact-list">
+            <a class="contact-item" href="tel:+9647505912323">
+              <span aria-hidden="true">☎</span>
+              <span>+964 750 591 23 23</span>
+            </a>
+            <a class="contact-item" href="mailto:mohammedmahmoud58@gmail.com">
+              <span aria-hidden="true">@</span>
+              <span>mohammedmahmoud58@gmail.com</span>
+            </a>
+            <div class="contact-item">
+              <span aria-hidden="true">⌖</span>
+              <span data-i18n="location">Erbil, Sulaymaniyah, Duhok - KRG</span>
+            </div>
+            <a class="btn btn-primary" href="tel:+9647505912323" data-i18n="contactButton">Request quote now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© 2026 <span data-i18n="brandFooter">Sunrise Solar Energy</span></p>
+      <p data-i18n="footerText">Empowering the future with sun.</p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        brand: "Sunrise Solar",
+        navServices: "Services",
+        navWork: "Our Work",
+        navProcess: "Process",
+        navContact: "Contact",
+        heroBadge: "Clean energy for homes and businesses",
+        heroTitle: "Power your life with Sunrise Solar.",
+        heroText: "A solar portfolio for installing complete systems, supplying panels, inverters and batteries, and maintaining reliable clean energy across Kurdistan.",
+        heroCta: "Get a free quote",
+        heroWork: "View our work",
+        statWarranty: "Years warranty",
+        statSave: "Possible bill savings",
+        statSupport: "Monitoring support",
+        mediaTitle: "Real solar work, ready to show.",
+        mediaText: "Installation footage from the Sunrise portfolio.",
+        mediaPill: "Featured Project",
+        servicesKicker: "Services",
+        servicesTitle: "Everything needed to move from sunlight to power.",
+        servicesCopy: "Sunrise handles planning, equipment, installation, testing, and long-term care for residential and commercial solar systems.",
+        serviceOneTitle: "Installation",
+        serviceOneText: "Professional rooftop and ground solar installation with smart inverters, clean wiring, testing, and handover support.",
+        serviceTwoTitle: "Solar equipment",
+        serviceTwoText: "High-quality panels, batteries, inverters, protection units, and complete kits selected for each customer's energy needs.",
+        serviceThreeTitle: "Maintenance",
+        serviceThreeText: "Cleaning, troubleshooting, repairs, battery checks, and performance optimization to keep systems efficient for years.",
+        workKicker: "Portfolio videos",
+        workTitle: "Show customers the work before they call.",
+        workCopy: "These local project videos are embedded directly into the portfolio, so visitors can watch installations, equipment, and finished solar systems.",
+        videoOneTitle: "Rooftop installation",
+        videoOneText: "A practical look at panel placement and site work.",
+        videoTwoTitle: "System setup",
+        videoTwoText: "Equipment, wiring, and installation details for customers.",
+        videoThreeTitle: "Project highlight",
+        videoThreeText: "A featured Sunrise project for the main portfolio reel.",
+        videoFourTitle: "On-site progress",
+        videoFourText: "A quick field clip showing real installation progress.",
+        videoFiveTitle: "Finished solar work",
+        videoFiveText: "Additional project footage for customers reviewing Sunrise work.",
+        processKicker: "How we work",
+        processTitle: "Clear steps from inspection to switch-on.",
+        processCopy: "The portfolio explains the service path in a simple way, making it easier for new customers to trust the process.",
+        stepOneTitle: "Site check",
+        stepOneText: "Measure roof space, shade, current load, and customer goals.",
+        stepTwoTitle: "System design",
+        stepTwoText: "Choose panels, inverter, battery capacity, and protection equipment.",
+        stepThreeTitle: "Install",
+        stepThreeText: "Mount, wire, test, and document the system professionally.",
+        stepFourTitle: "Support",
+        stepFourText: "Monitor performance, maintain equipment, and help when needed.",
+        proofKicker: "Why Sunrise",
+        proofTitle: "Built for confidence, not confusion.",
+        proofCopy: "Customers can quickly see why Sunrise is a strong choice for solar buying, installation, and care.",
+        proofOneTitle: "Lower electricity bills",
+        proofOneText: "Designed to reduce grid dependence.",
+        proofTwoTitle: "Warranty options",
+        proofTwoText: "Long-term confidence for every system.",
+        proofThreeTitle: "Support and monitoring",
+        proofThreeText: "Help for cleaning, repairs, and performance.",
+        contactKicker: "Get started",
+        contactTitle: "Ready to go solar?",
+        contactCopy: "Contact Sunrise Solar for a custom quote, free consultation, or equipment recommendation for your home or business.",
+        location: "Erbil, Sulaymaniyah, Duhok - KRG",
+        contactButton: "Request quote now",
+        brandFooter: "Sunrise Solar Energy",
+        footerText: "Empowering the future with sun."
+      },
+      ku: {
+        brand: "ڕۆژهەڵاتی خۆر",
+        navServices: "خزمەتگوزاری",
+        navWork: "کارەکانمان",
+        navProcess: "پرۆسە",
+        navContact: "پەیوەندی",
+        heroBadge: "وزەی پاک بۆ ماڵ و بازرگانی",
+        heroTitle: "ژیانت بە خۆر بەهێز بکە",
+        heroText: "پۆرتفۆلیۆیەکی خۆری بۆ دامەزراندنی سیستەمی تەواو، دابینکردنی پانێڵ، ئینڤێرتەر و پاتری، و پاراستنی وزەی پاک لە کوردستان.",
+        heroCta: "نرخاندنی خۆڕایی وەرگرە",
+        heroWork: "کارەکان ببینە",
+        statWarranty: "ساڵ ضمانت",
+        statSave: "پاشەکەوتی ئەگەری پسوولە",
+        statSupport: "پشتیوانی چاودێری",
+        mediaTitle: "کاری ڕاستەقینەی خۆر، ئامادەی نمایش.",
+        mediaText: "ڤیدیۆی دامەزراندن لە پۆرتفۆلیۆی Sunrise.",
+        mediaPill: "پرۆژەی تایبەت",
+        servicesKicker: "خزمەتگوزاری",
+        servicesTitle: "هەموو شتێک بۆ گۆڕینی تیشکی خۆر بۆ کارەبا.",
+        servicesCopy: "Sunrise پلاندانان، کەلوپەل، دامەزراندن، تاقیکردنەوە و چاودێری درێژخایەن بۆ سیستەمی ماڵ و بازرگانی ئەنجام دەدات.",
+        serviceOneTitle: "دامەزراندن",
+        serviceOneText: "دامەزراندنی پیشەیی لەسەر بان و زەوی بە ئینڤێرتەری زیرەک، وایەری پاک، تاقیکردنەوە و پشتیوانی تەواو.",
+        serviceTwoTitle: "کەلوپەلی خۆری",
+        serviceTwoText: "پانێڵ، پاتری، ئینڤێرتەر، پاراستن و کیتی تەواو بە کوالێتی بەرز بەپێی پێویستی وزەی کڕیار.",
+        serviceThreeTitle: "چاودێری",
+        serviceThreeText: "پاککردنەوە، چارەسەرکردنی کێشە، چاککردنەوە، پشکنینی پاتری و باشکردنی کارایی سیستەم.",
+        workKicker: "ڤیدیۆی پۆرتفۆلیۆ",
+        workTitle: "پێش ئەوەی کڕیار پەیوەندی بکات کارەکان پیشان بدە.",
+        workCopy: "ئەم ڤیدیۆیانە ڕاستەوخۆ لە پۆرتفۆلیۆکە دانراون بۆ ئەوەی سەردانکەران دامەزراندن، کەلوپەل و سیستەمی تەواو ببینن.",
+        videoOneTitle: "دامەزراندنی بان",
+        videoOneText: "بینینی شوێنی پانێڵ و کاری شوێن.",
+        videoTwoTitle: "ڕێکخستنی سیستەم",
+        videoTwoText: "وردەکاری کەلوپەل، وایەر و دامەزراندن بۆ کڕیار.",
+        videoThreeTitle: "نمایشی پرۆژە",
+        videoThreeText: "پرۆژەیەکی تایبەتی Sunrise بۆ ڕیلی سەرەکی.",
+        videoFourTitle: "پێشکەوتنی شوێن",
+        videoFourText: "ڤیدیۆیەکی کورتی مەیدانی بۆ پیشاندانی پێشکەوتنی دامەزراندن.",
+        videoFiveTitle: "کاری تەواوکراوی خۆری",
+        videoFiveText: "ڤیدیۆی زیاتر بۆ کڕیاران کە کاری Sunrise دەبینن.",
+        processKicker: "چۆن کار دەکەین",
+        processTitle: "هەنگاوی ڕوون لە پشکنینەوە تا کارپێکردن.",
+        processCopy: "پۆرتفۆلیۆکە ڕێگای خزمەتگوزاری بە شێوەیەکی سادە ڕوون دەکاتەوە تا متمانەی کڕیار زیاتر بێت.",
+        stepOneTitle: "پشکنینی شوێن",
+        stepOneText: "پێوانەکردنی بان، سێبەر، باری کارەبا و ئامانجی کڕیار.",
+        stepTwoTitle: "دیزاینی سیستەم",
+        stepTwoText: "هەڵبژاردنی پانێڵ، ئینڤێرتەر، قەبارەی پاتری و کەلوپەلی پاراستن.",
+        stepThreeTitle: "دامەزراندن",
+        stepThreeText: "دانان، وایەرکردن، تاقیکردنەوە و بەڵگەنامەکردنی سیستەم بە شێوەی پیشەیی.",
+        stepFourTitle: "پشتیوانی",
+        stepFourText: "چاودێری کارایی، پاراستنی کەلوپەل و یارمەتی کاتێک پێویستە.",
+        proofKicker: "بۆچی Sunrise",
+        proofTitle: "بۆ متمانە دروستکراوە، نە سەرلێشێوان.",
+        proofCopy: "کڕیار زوو دەبینێت بۆچی Sunrise هەڵبژاردنێکی باشە بۆ کڕین، دامەزراندن و چاودێری خۆر.",
+        proofOneTitle: "کەمکردنەوەی پسوولەی کارەبا",
+        proofOneText: "دیزاین کراوە بۆ کەمکردنەوەی پشتبەستن بە تۆڕ.",
+        proofTwoTitle: "هەڵبژاردەی ضمانت",
+        proofTwoText: "متمانەی درێژخایەن بۆ هەر سیستەمێک.",
+        proofThreeTitle: "پشتیوانی و چاودێری",
+        proofThreeText: "یارمەتی بۆ پاککردنەوە، چاککردنەوە و کارایی.",
+        contactKicker: "دەست پێ بکە",
+        contactTitle: "ئامادەی بۆ وزەی خۆر؟",
+        contactCopy: "پەیوەندی بە Sunrise Solar بکە بۆ نرخاندنی تایبەت، ڕاوێژی خۆڕایی یان پێشنیاری کەلوپەل بۆ ماڵ یان بازرگانیت.",
+        location: "هەولێر، سلێمانی، دهۆک - هەرێمی کوردستان",
+        contactButton: "ئێستا داوای نرخاندن بکە",
+        brandFooter: "Sunrise Solar Energy",
+        footerText: "بەهێزکردنی داهاتوو بە خۆر."
+      },
+      ar: {
+        brand: "شروق الشمس للطاقة",
+        navServices: "الخدمات",
+        navWork: "أعمالنا",
+        navProcess: "الخطوات",
+        navContact: "تواصل",
+        heroBadge: "طاقة نظيفة للمنازل والشركات",
+        heroTitle: "شغّل حياتك مع شروق الشمس للطاقة.",
+        heroText: "بورتفوليو للطاقة الشمسية يشمل تركيب الأنظمة المتكاملة، توريد الألواح والعواكس والبطاريات، وصيانة الطاقة النظيفة في كوردستان.",
+        heroCta: "احصل على عرض مجاني",
+        heroWork: "شاهد أعمالنا",
+        statWarranty: "سنوات ضمان",
+        statSave: "توفير محتمل بالفواتير",
+        statSupport: "دعم ومراقبة",
+        mediaTitle: "عمل شمسي حقيقي جاهز للعرض.",
+        mediaText: "لقطات تركيب من بورتفوليو Sunrise.",
+        mediaPill: "مشروع مميز",
+        servicesKicker: "الخدمات",
+        servicesTitle: "كل ما تحتاجه لتحويل ضوء الشمس إلى طاقة.",
+        servicesCopy: "تتولى Sunrise التخطيط، المعدات، التركيب، الاختبار، والرعاية طويلة المدى لأنظمة المنازل والشركات.",
+        serviceOneTitle: "التركيب",
+        serviceOneText: "تركيب احترافي على الأسطح والأرض مع عواكس ذكية، تمديدات مرتبة، اختبار، ودعم عند التسليم.",
+        serviceTwoTitle: "معدات الطاقة الشمسية",
+        serviceTwoText: "ألواح وبطاريات وعواكس ووحدات حماية ومجموعات كاملة عالية الجودة حسب حاجة كل عميل.",
+        serviceThreeTitle: "الصيانة",
+        serviceThreeText: "تنظيف، تشخيص الأعطال، إصلاحات، فحص البطاريات، وتحسين الأداء للحفاظ على كفاءة النظام.",
+        workKicker: "فيديوهات البورتفوليو",
+        workTitle: "اعرض العمل للعملاء قبل أن يتصلوا.",
+        workCopy: "هذه الفيديوهات المحلية مدمجة مباشرة في البورتفوليو ليشاهد الزوار التركيب والمعدات والأنظمة المكتملة.",
+        videoOneTitle: "تركيب على السطح",
+        videoOneText: "نظرة عملية على وضع الألواح والعمل في الموقع.",
+        videoTwoTitle: "إعداد النظام",
+        videoTwoText: "تفاصيل المعدات والتمديدات والتركيب للعملاء.",
+        videoThreeTitle: "مشروع مميز",
+        videoThreeText: "مشروع Sunrise مميز للفيديو الرئيسي في البورتفوليو.",
+        videoFourTitle: "تقدم العمل في الموقع",
+        videoFourText: "لقطة ميدانية قصيرة تعرض تقدم التركيب الحقيقي.",
+        videoFiveTitle: "عمل شمسي مكتمل",
+        videoFiveText: "لقطات إضافية للمشروع ليستعرض العملاء أعمال Sunrise.",
+        processKicker: "طريقة العمل",
+        processTitle: "خطوات واضحة من الفحص إلى التشغيل.",
+        processCopy: "يوضح البورتفوليو مسار الخدمة ببساطة، مما يساعد العملاء الجدد على الثقة بالعملية.",
+        stepOneTitle: "فحص الموقع",
+        stepOneText: "قياس مساحة السطح والظل والحمل الحالي وأهداف العميل.",
+        stepTwoTitle: "تصميم النظام",
+        stepTwoText: "اختيار الألواح والعواكس وسعة البطارية ومعدات الحماية.",
+        stepThreeTitle: "التركيب",
+        stepThreeText: "التثبيت والتمديد والاختبار وتوثيق النظام باحتراف.",
+        stepFourTitle: "الدعم",
+        stepFourText: "مراقبة الأداء وصيانة المعدات وتقديم المساعدة عند الحاجة.",
+        proofKicker: "لماذا Sunrise",
+        proofTitle: "مصمم للثقة، لا للحيرة.",
+        proofCopy: "يمكن للعملاء معرفة سبب قوة Sunrise في شراء وتركيب وصيانة الطاقة الشمسية بسرعة.",
+        proofOneTitle: "فواتير كهرباء أقل",
+        proofOneText: "مصمم لتقليل الاعتماد على الشبكة.",
+        proofTwoTitle: "خيارات ضمان",
+        proofTwoText: "ثقة طويلة المدى لكل نظام.",
+        proofThreeTitle: "دعم ومراقبة",
+        proofThreeText: "مساعدة في التنظيف والإصلاح والأداء.",
+        contactKicker: "ابدأ الآن",
+        contactTitle: "هل أنت مستعد للطاقة الشمسية؟",
+        contactCopy: "تواصل مع Sunrise Solar للحصول على عرض مخصص أو استشارة مجانية أو توصية معدات لمنزلك أو شركتك.",
+        location: "أربيل، السليمانية، دهوك - إقليم كوردستان",
+        contactButton: "اطلب عرضاً الآن",
+        brandFooter: "Sunrise Solar Energy",
+        footerText: "تمكين المستقبل بالشمس."
+      }
+    };
+
+    const html = document.documentElement;
+    const body = document.body;
+    const buttons = document.querySelectorAll(".lang-btn");
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (dict[key]) element.textContent = dict[key];
+      });
+
+      html.lang = lang;
+      html.dir = lang === "en" ? "ltr" : "rtl";
+      body.classList.toggle("rtl", lang !== "en");
+
+      buttons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+        button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    setLanguage("en");
+  </script>
+</body>
+</html>
